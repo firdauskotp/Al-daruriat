@@ -1,0 +1,102 @@
+name: al_daruriat
+description: A new Flutter project.
+
+# The following line prevents the package from being accidentally published to
+# pub.dev using `pub publish`. This is preferred for private packages.
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.2.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+
+  cloud_firestore: ^0.13.0+1
+  firebase_database: ^3.1.1
+  firebase_auth: ^0.16.0
+  get_it: ^4.0.2
+  provider: ^3.2.0
+  provider_architecture: ^1.0.3
+  # implement if-else rendering
+  flutter_conditional_rendering: ^1.1.1
+  # implement loading screen
+  loading_overlay: ^0.2.1
+  # flutter html https://pub.dev/packages/flutter_widget_from_html#-readme-tab-
+  flutter_widget_from_html: ^0.3.3+4
+  # flutter webview https://flutter-examples.com/flutter-open-web-url-in-app-using-webview/
+  webview_flutter: ^0.3.19+6
+  # checkbox and radio button package https://pub.dev/packages/grouped_buttons#-readme-tab-
+  # location tracker package https://pub.dev/packages/geolocator
+  # apk icon package https://pub.dev/packages/flutter_launcher_icons
+  # stackoverflow https://stackoverflow.com/questions/43928702/how-to-change-the-application-launcher-icon-on-flutter
+  flutter_launcher_icons: "^0.7.5"
+
+  cupertino_icons: ^0.1.2
+  # google fonts
+  google_fonts: ^0.3.5
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter_icons:
+  image_path: "libAssets/images/icon.png"
+  android: true
+  ios: true
+
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter.
+flutter:
+
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+#  assets:
+#    - libAssets/images/profile_background.jpg
+#    - libAssets/images/placeholder.jpg
+#    - libAssets/images/EPL_Trophy.jpg
+#    - libAssets/images/FACup.jpg
+#    - libAssets/images/login_wallpaper.jpg
+#    - libAssets/images/field.jpg
+  #  - images/a_dot_ham.jpeg
+
+  # An image asset can refer to one or more resolution-specific "variants", see
+  # https://flutter.io/assets-and-images/#resolution-aware.
+
+  # For details regarding adding assets from package dependencies, see
+  # https://flutter.io/assets-and-images/#from-packages
+
+  # To add custom fonts to your application, add a fonts section here,
+  # in this "flutter" section. Each entry in this list should have a
+  # "family" key with the font family name, and a "fonts" key with a
+  # list giving the asset and other descriptors for the font. For
+  # example:
+  fonts:
+    - family: CustomFont
+      fonts:
+        - asset: libAssets/fonts/CustomFont.ttf
+
+    - family: Roboto
+      fonts:
+        - asset: libAssets/fonts/Roboto-Light.ttf
+
+    - family: back_icon
+      fonts:
+        - asset: libAssets/fonts/back_icon.ttf
+
+    - family: SF-Pro-Display-Bold
+      fonts:
+        - asset: libAssets/fonts/SF-Pro-Display-Bold.ttf
+
+
+    - family: SF-Pro-Display-Regular
+      fonts:
+        - asset: libAssets/fonts/SF-Pro-Display-Regular.ttf
