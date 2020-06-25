@@ -64,7 +64,25 @@ class _MyDonationPageState extends State<MyDonationPage>{
                   ),
                   onPressed: _launchURL,
                 ),
-              )
+              ),
+              ButtonTheme (
+                minWidth: 1400.0,
+                height: 40.0,
+                child:MaterialButton(
+                  color: Colors.cyan,
+                  child: Text(
+                    "BACK",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                  onPressed: (){
+                    Navigator.pop(context);
+                  },
+                ),
+              ),
             ],
           ),
        ),

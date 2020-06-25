@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "608322026869",
+    "firebase_url": "https://aldaruriat.firebaseio.com",
+    "project_id": "aldaruriat",
+    "storage_bucket": "aldaruriat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:608322026869:android:e2f4df38a9440e6f1ee73c",
+        "android_client_info": {
+          "package_name": "com.example.al_daruriat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "608322026869-ejep3hpuj1smjn3ltev7phptkf8hlo80.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnY0vVz_KDV6N6iwEsvsg4FCvV9a6DGlo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "608322026869-ejep3hpuj1smjn3ltev7phptkf8hlo80.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
