@@ -1,4 +1,6 @@
 import 'package:al_daruriat/donate.dart';
+import 'package:al_daruriat/register.dart';
+import 'package:al_daruriat/login.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -83,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage>{
                         onPressed: (){
                           Navigator.of(context).push(
                               MaterialPageRoute(
-//                                  builder: (context) => MyLoginPage()
+                                  builder: (context) => LoginPage(),
                               )
                           );
                         },
@@ -101,7 +103,7 @@ class _MyHomePageState extends State<MyHomePage>{
                       onPressed: (){
                         Navigator.of(context).push(
                             MaterialPageRoute(
-                                builder: (context) =>
+                                builder: (context) => RegisterPage(),
                             )
                         );
                       },

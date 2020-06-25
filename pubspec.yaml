@@ -64,6 +64,7 @@ flutter:
   assets:
     - images/homewallpaper.jpg
     - images/donation_wallpaper.png
+    - images/registerwallpaper.PNG
 #    - libAssets/images/FACup.jpg
 #    - libAssets/images/login_wallpaper.jpg
 #    - libAssets/images/field.jpg
