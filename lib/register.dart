@@ -23,6 +23,7 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController pwdInputController;
   TextEditingController confirmPwdInputController;
   TextEditingController cardInputController;
+  TextEditingController addressInputController;
 
   @override
   initState() {
@@ -33,6 +34,7 @@ class _RegisterPageState extends State<RegisterPage> {
     pwdInputController = new TextEditingController();
     confirmPwdInputController = new TextEditingController();
     cardInputController = new TextEditingController();
+    addressInputController = new TextEditingController();
     super.initState();
   }
 
@@ -275,7 +277,30 @@ class _RegisterPageState extends State<RegisterPage> {
                           },
                         ),
                       ),
-
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical:6.0),
+                        child: TextFormField(
+                          decoration: InputDecoration(
+                            labelText: 'Address *',
+                            fillColor: Colors.white,
+                            filled: true,
+                            //                    errorText: "* Please enter a valid user name",
+                            labelStyle:
+                            TextStyle(color: Colors.black, letterSpacing: 1.3),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.red,
+                              ),
+                            ),
+                          ),
+                          controller: addressInputController,
+                          validator: (value){
+                            if (value.isEmpty){
+                              return "* Please enter a valid address";
+                            }
+                          },
+                        ),
+                      ),
                       ButtonTheme (
                         minWidth: 1200.0,
                         height: 40.0,
@@ -303,6 +328,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   "email" : emailInputController.text,
                                   "password" : pwdInputController.text,
                                   "Card_No" : cardInputController.text,
+                                  "Address" : addressInputController.text,
 
                                 })
                                     .then((result) => {
@@ -313,6 +339,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   pwdInputController.clear(),
                                   confirmPwdInputController.clear(),
                                   cardInputController.clear(),
+                                  addressInputController.clear(),
 
                                   showDialog(
                                       context: context,

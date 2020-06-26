@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:al_daruriat/menu.dart';
 class LoginPage extends StatefulWidget {
 //  LoginPage({Key key}) : super(key: key);
+  final String title = "LOGIN";
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -57,9 +58,10 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      /*appBar: AppBar(
-          title: Text("Login"),
-        ),*/
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text(widget.title),
+        ),
         body: Container(
             padding: const EdgeInsets.all(20.0),
             constraints: BoxConstraints.expand(),
