@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 //import 'package:streamingservice/ui/widgets/route.dart';
-
+import 'package:al_daruriat/menu.dart';
 class LoginPage extends StatefulWidget {
 //  LoginPage({Key key}) : super(key: key);
 
@@ -65,7 +65,7 @@ class _LoginPageState extends State<LoginPage> {
             constraints: BoxConstraints.expand(),
             decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: ExactAssetImage("libAssets/images/login_wallpaper.jpg"),
+                    image: ExactAssetImage("images/loginwallpaper.PNG"),
                     fit: BoxFit.cover
                 )
             ),
@@ -75,17 +75,7 @@ class _LoginPageState extends State<LoginPage> {
                   key: _loginFormKey,
                   child: Column(
                     children: <Widget>[
-                      SizedBox(
-                          height:80.0
-                      ),
-                      CircleAvatar(
-                        //                backgroundColor: Colors.lightGreenAccent,
-                        child: Image.asset("libAssets/images/placeholder.jpg"),
-                        radius:50.0,
-                      ),
-                      SizedBox(
-                          height:80.0
-                      ),
+
                       Padding(
                         padding: EdgeInsets.symmetric(vertical:6.0),
                         child:TextFormField(
@@ -151,10 +141,19 @@ class _LoginPageState extends State<LoginPage> {
                                   password: pwdInputController.text)
                                   .then((authResult) =>
                                   Firestore.instance
-                                      .collection("users")
+                                      .collection("AD_users")
                                       .document(authResult.user.uid)
                                       .get()
-)
+                                  .then((DocumentSnapshot) =>
+                                      {
+                                        Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                           builder: (context) => MenuPage(),
+                                          )
+                                        )
+                                      }
+                                  )
+                                )
                                   .catchError((err) {
                                 showDialog(
                                     context: context,

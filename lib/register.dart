@@ -3,6 +3,7 @@ import 'package:al_daruriat/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter/services.dart';
 //import 'package:streamingservice/ui/widgets/route.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -21,6 +22,7 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController emailInputController;
   TextEditingController pwdInputController;
   TextEditingController confirmPwdInputController;
+  TextEditingController cardInputController;
 
   @override
   initState() {
@@ -30,6 +32,7 @@ class _RegisterPageState extends State<RegisterPage> {
     emailInputController = new TextEditingController();
     pwdInputController = new TextEditingController();
     confirmPwdInputController = new TextEditingController();
+    cardInputController = new TextEditingController();
     super.initState();
   }
 
@@ -215,6 +218,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                           controller: pwdInputController,
                           obscureText: _isHid,
+                          validator: pwdValidator,
                         ),
                       ),
                       Padding(
@@ -241,7 +245,36 @@ class _RegisterPageState extends State<RegisterPage> {
                           obscureText: _isHid,
                         ),
                       ),
-
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical:6.0),
+                        child: TextFormField(
+                          keyboardType: TextInputType.number,
+                          inputFormatters: <TextInputFormatter>[
+                            WhitelistingTextInputFormatter.digitsOnly
+                          ],
+                          decoration: InputDecoration(
+                            labelText: 'Input Card Number *',
+                            fillColor: Colors.white,
+                            filled: true,
+                            //                    errorText: "* Please enter a valid user name",
+                            labelStyle:
+                            TextStyle(color: Colors.black, letterSpacing: 1.3),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.red,
+                              ),
+                            ),
+                          ),
+                          controller: cardInputController,
+                          validator: (value){
+                            if (value.isEmpty){
+                              return "* Please enter a valid card number";
+                            } else if (value.length != 12){
+                              return "* Malaysian Card number must have 12 digits";
+                            }
+                          },
+                        ),
+                      ),
 
                       ButtonTheme (
                         minWidth: 1200.0,
@@ -268,6 +301,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                   "firstname" : firstNameInputController.text,
                                   "lastname" : lastNameInputController.text,
                                   "email" : emailInputController.text,
+                                  "password" : pwdInputController.text,
+                                  "Card_No" : cardInputController.text,
 
                                 })
                                     .then((result) => {
@@ -277,6 +312,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   emailInputController.clear(),
                                   pwdInputController.clear(),
                                   confirmPwdInputController.clear(),
+                                  cardInputController.clear(),
 
                                   showDialog(
                                       context: context,
@@ -305,8 +341,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                       context: context,
                                       builder: (BuildContext context) {
                                         return AlertDialog(
-                                          title: Text("Oh no! Something Happened!"),
-                                          content: Text("Seems like the email was registered!"),
+                                          title: Text("Error"),
+                                          content: Text("Email registered. Use a different email"),
                                           actions: <Widget>[
                                             FlatButton(
                                               child: Text("Close"),
@@ -320,29 +356,30 @@ class _RegisterPageState extends State<RegisterPage> {
                                 });
                               } else {
                                 showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return AlertDialog(
-                                        title: Text("Error"),
-                                        content: Text("The passwords do not match"),
-                                        actions: <Widget>[
-                                          FlatButton(
-                                            child: Text("Close"),
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
-                                            },
-                                          )
-                                        ],
-                                      );
-                                    });
-                              }
-                            }
-                          },
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                      title: Text("Error"),
+                                      content: Text("The passwords do not match"),
+                                      actions: <Widget>[
+                                      FlatButton(
+                                      child: Text("Close"),
+                                      onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  )
+                                ],
+                              );
+                            });
+                          }}},
                         ),
                       ),
 
                     ],
                   ),
-                ))));
+                )
+              )
+            )
+          );
   }
 }
