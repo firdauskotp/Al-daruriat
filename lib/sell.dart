@@ -15,7 +15,7 @@ class SellPage extends StatefulWidget {
 class _SellPageState extends State<SellPage>{
   final GlobalKey<FormState> _sellFormKey = GlobalKey<FormState>();
 
-  int selectedRadioTile;
+
   final firestoreInstance = Firestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -74,10 +74,9 @@ class _SellPageState extends State<SellPage>{
                       Padding(
                         padding: EdgeInsets.symmetric(vertical:6.0),
                         child: TextFormField(
-                          keyboardType: TextInputType.number,
                           decoration: InputDecoration(
                             labelText: 'What do you want to sell',
-                            hintText: "FM for facemask, HS for sanitizer",
+                            hintText: "facemask or sanitizer?",
                             fillColor: Colors.white,
                             filled: true,
                             //                    errorText: "* Please enter a valid user name",
@@ -225,9 +224,9 @@ class _SellPageState extends State<SellPage>{
                                     "Quantity": quantity,
                                     "Price": price,
                                     "HP_No": phone,
-                                    "Seller First Name": fname,
-                                    "Seller Last Name": lname,
-                                    "Seller Address": address,
+                                    "Seller_First_Name": fname,
+                                    "Seller_Last_Name": lname,
+                                    "Seller_Address": address,
                                   }
 
                               );
