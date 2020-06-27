@@ -21,6 +21,7 @@ class _MenuPageState extends State<MenuPage> {
 
 
 
+
   @override
   Widget build(BuildContext context) {
 
@@ -74,7 +75,7 @@ class _MenuPageState extends State<MenuPage> {
                         padding: EdgeInsets.symmetric(horizontal: 16.0, vertical:12.0),
                         child: MaterialButton(
                           minWidth: 1000,
-                          child: Text('BUY',
+                          child: Text('VIEW',
                             style: TextStyle(
                               color: Colors.white,
                             ),),

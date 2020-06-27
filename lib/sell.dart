@@ -19,25 +19,36 @@ class _SellPageState extends State<SellPage>{
   final firestoreInstance = Firestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  String choice;
   String quantity;
   String price;
+  String fname = "";
+  String lname = "";
+  String address = "";
+  String phone;
+  String prod;
 
-  @override
-  initState() {
+  userSync() async {
+    FirebaseUser user = await FirebaseAuth.instance.currentUser();
+    Firestore.instance.collection("AD_users").document(user.uid).snapshots()
+        .listen((DocumentSnapshot data) {
+      setState(() {
 
-    super.initState();
-    selectedRadioTile = 0;
+
+        fname = data['firstname'];
+        lname = data['lastname'];
+        address = data['Address'];
+      });
+    }
+    );
+    return [fname, lname, address];
   }
 
-  setSelectedRadioTile(int val){
-    setState(() {
-      selectedRadioTile = val;
-    });
-  }
+
 
   @override
   Widget build(BuildContext context) {
+    userSync();
+    Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
@@ -57,26 +68,42 @@ class _SellPageState extends State<SellPage>{
                   key: _sellFormKey,
                   child: Column(
                     children: <Widget>[
-                      RadioListTile(
-                        value:1,
-                        groupValue: selectedRadioTile,
-                        selected: true,
-                        title: Text("Face Mask"),
-                        onChanged: (val){
-                          setSelectedRadioTile(val);
-                          choice = val;
-                        },
-                        activeColor: Colors.cyan,
+                      Text(
+                        "Welcome " + fname + " " + lname,
                       ),
-                      RadioListTile(
-                        value:2,
-                        groupValue: selectedRadioTile,
-                        title: Text("Hand Sanitizer"),
-                        onChanged: (val){
-                          choice = val;
-                          setSelectedRadioTile(val);
-                        },
-                        activeColor: Colors.cyan,
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical:6.0),
+                        child: TextFormField(
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                            labelText: 'What do you want to sell',
+                            hintText: "FM for facemask, HS for sanitizer",
+                            fillColor: Colors.white,
+                            filled: true,
+                            //                    errorText: "* Please enter a valid user name",
+                            labelStyle:
+                            TextStyle(color: Colors.black, letterSpacing: 1.3),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.red,
+                              ),
+                            ),
+                          ),
+                          onChanged: (value) {
+                            setState(() {
+                              prod = value;
+                            });
+                          },
+                          validator: (String value){
+                            if (value.isEmpty){
+                              return '* Product is required';
+                            }
+                          },
+                          onSaved: (String value){
+                            quantity = value;
+                            //                    _username = value;
+                          },
+                        ),
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(vertical:6.0),
@@ -115,7 +142,7 @@ class _SellPageState extends State<SellPage>{
                       Padding(
                         padding: EdgeInsets.symmetric(vertical:6.0),
                         child: TextFormField(
-                          textCapitalization: TextCapitalization.sentences,
+                          keyboardType: TextInputType.number,
                           decoration: InputDecoration(
                             labelText: 'Price *',
                             hintText: "4.50",
@@ -146,6 +173,40 @@ class _SellPageState extends State<SellPage>{
                           },
                         ),
                       ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical:6.0),
+                        child: TextFormField(
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                            labelText: 'Phone Number *',
+                            hintText: "012-2374030",
+                            fillColor: Colors.white,
+                            filled: true,
+                            //                    errorText: "* Please enter a valid user name",
+                            labelStyle:
+                            TextStyle(color: Colors.black, letterSpacing: 1.3),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.red,
+                              ),
+                            ),
+                          ),
+                          onChanged: (value) {
+                            setState(() {
+                              phone = value;
+                            });
+                          },
+                          validator: (String value){
+                            if (value.isEmpty){
+                              return '* Phone Number is required';
+                            }
+                          },
+                          onSaved: (String value){
+                            phone = value;
+                            //                    _username = value;
+                          },
+                        ),
+                      ),
                       ButtonTheme (
                         minWidth: 1200.0,
                         height: 40.0,
@@ -160,9 +221,13 @@ class _SellPageState extends State<SellPage>{
                               _sellFormKey.currentState.save();
                               Firestore.instance.collection("Products").document("Prod_ID_No$rng2").setData(
                                   {
-                                    "Item": choice,
+                                    "Item": prod,
                                     "Quantity": quantity,
                                     "Price": price,
+                                    "HP_No": phone,
+                                    "Seller First Name": fname,
+                                    "Seller Last Name": lname,
+                                    "Seller Address": address,
                                   }
 
                               );

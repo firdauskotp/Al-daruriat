@@ -25,7 +25,7 @@ class _BuyPageSuccess extends State<BuyPageSuccess>{
         constraints: BoxConstraints.expand(),
         decoration: BoxDecoration(
           image: DecorationImage(
-              image: ExactAssetImage("images/donation_wallpaper.png"),
+              image: ExactAssetImage("images/registerwallpaper.PNG"),
               fit: BoxFit.cover
           ),
         ),
